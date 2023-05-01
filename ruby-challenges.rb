@@ -32,7 +32,28 @@ letter_t = 't'
 us_states = { northwest: ['Washington', 'Oregon', 'Idaho'], southwest: ['California', 'Arizona', 'Nevada'], notheast: ['Maine', 'New Hampshire', 'Rhode Island'] }
 # Expected output: ['Arizona', 'California', 'Idaho', 'Maine', 'Nevada', 'New Hampshire', 'Oregon', 'Rhode Island', 'Washington'] 
 
+# def flat_array(hash)
+# all_array = []
+#     hash.each do {|key, value| array.flatten(array).sort.join}
+#     end
+#     all_array << array
+#     return all_array
+# end
+# p flat_array(us_states)
 
+def flat_array(hash)
+all_array = []
+    hash.each do |key, value|
+        if value.is_a?(Hash)
+            all_array.concat(flat_array(value))
+        else
+            all_array << value
+        end
+    end
+    return all_array.flatten.sort
+end
+
+p flat_array(us_states)
 # --------------------3a) Create a class called Bike that is initialized with a model, wheels, and current_speed. The default number of wheels is 2. The current_speed should start at 0. Create a bike_info method that returns a sentence with all the data from the bike object.
 
 # Expected output example: 'The Trek bike has 2 wheels and is going 0 mph.'
